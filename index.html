@@ -1,0 +1,36 @@
+<!-- React의 작동 방식 
+    React.js : interactive한 UI를 만들 수 있게 함
+**밑에 내용은 어려운 방법 실제 업무에서는 더 쉬운 방법사용
+*바닐라JS는 HTML -> JS 순서
+*리액트는 JS -> HTML 순서
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script>
+    const root = document.getElementById("root");
+    const h3 = React.createElement(
+        "h3",  //"html 테그명"
+        {
+            onMouseEnter: () => console.log('mouse enter'),
+        },
+        "Hello, i am span"); 
+    // ReactDOM.render(span,root) //React element를 HTML에 두는 역할 (span, span이 갈 위치)
+
+    const btn =React.createElement(
+        "button",
+    {
+        onClick: ()=> console.log('i am clicked'), //html의 addEventListener와 같음
+        style :{backgroundColor :"tomato"},
+    },
+    "Click me");
+    const aa =React.createElement("div", null,[h3,btn]);
+    ReactDOM.render(aa,root)
+</script>
+</html>

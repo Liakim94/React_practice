@@ -1,0 +1,19 @@
+<!-- 기존 javascript 방식의 코드 -->
+<!DOCTYPE html>
+<html>
+<body>
+    <span>Total clicks: 0</span>
+    <button id="btn">Click me</button>
+</body>
+<script>
+    let counter =0;
+    const button = document.getElementById("btn");
+    const span = document.querySelector("span");
+    function handleClick(){
+        
+        counter = counter + 1;
+        span.innerText = `Total clicks: ${counter}`; //홑따옴표인줄 알고 처음에 에러 발생₩
+    }
+    button.addEventListener("click",handleClick)
+</script>
+</html>
