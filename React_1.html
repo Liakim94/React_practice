@@ -18,6 +18,7 @@
     const h3 = React.createElement(
         "h3",  //"html 테그명"
         {
+            id:"title", // h3의 id명도 지정 가능
             onMouseEnter: () => console.log('mouse enter'),
         },
         "Hello, i am span"); 
@@ -29,8 +30,8 @@
         onClick: ()=> console.log('i am clicked'), //html의 addEventListener와 같음
         style :{backgroundColor :"tomato"},
     },
-    "Click me");
-    const aa =React.createElement("div", null,[h3,btn]);
-    ReactDOM.render(aa,root)
+        "Click me");
+    const div =React.createElement("div", null,[h3,btn]);
+    ReactDOM.render(div,root)
 </script>
 </html>
