@@ -1,0 +1,95 @@
+<!-- State 함수 활용
+    super converter
+    분을 시간으로, 시간을 분으로 변환시키기
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div id="root"></div>
+</body>
+
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel"> //JSX script 추가 후 type 맞춰주면 적용됨
+    function MinutesToHoures() {
+        const [amount, setAmount] = React.useState(0);
+        // input value 값을 state명과 동일하게 주어서 데이터 값을 가져옴 
+        const [flipped, setFlipped] = React.useState(false); //초기값은 false
+        const onChange = (event) => {
+            setAmount(event.target.value); //js와 동일하게 이벤트 시 value값 가져올 수 있음
+        };
+        const reset = () => setAmount(0);
+        const onFlip = () => {
+            reset();
+            setFlipped((current) => !current);
+        }; //flipped가 true면 false, false면 ture인 함수
+        return (
+            <div>
+                {/*<label for="minutes">Minutes</label>  for 는 js 용어로 리액트에서 사용 안함. htmlFor로 사용해야 함*/}
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input value={flipped ? amount * 60 : amount} onChange={onChange} id="minutes" placeholder="Minutes" type="number" disabled={flipped} />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input value={flipped ? amount : Math.round(amount / 60)} id="hours" placeholder="Hours" type="number" disabled={!flipped} onChange={onChange} />
+                    {/* math.round로 내림 처리. 삼항연산자 사용하여 flipped값에 따라 계산식값이 출력되거나 입력값이 출력되게 구현*/}
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
+            </div>
+        );
+    }
+    function KmToMiles() {
+        const [amount, setAmount] = React.useState(0);
+        const [flip, setFlip] = React.useState(false);
+        const clickChange = (event) => {
+            setAmount(event.target.value);
+        };
+        const doReset = () => setAmount(0);
+        const fliping = () => {
+            doReset();
+            setFlip((current) => !current);
+        }
+        return (
+            <div>
+                <div>
+                    <label htmlFor="kilometers">kilometers</label>
+                    <input value={flip ? amount * 1.609 : amount} id="kilometers" placeholder="Kilometers" type="number" onChange={clickChange} disabled={flip} /></div>
+                <div>
+                    <label htmlFor="miles">Miles</label>
+                    <input value={flip ? amount : amount / 1.609} id="miles" placeholder="Miles" type="number" disabled={!flip} onChange={clickChange} /></div>
+                <button onClick={doReset}>Reset</button>
+                <button onClick={fliping}>{flip ? "Turn back" : "Invert"}</button>
+            </div>
+        );
+    }
+    function App() {
+        const [index, setIndex] = React.useState("xx");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return (
+            <div>
+                <h1>Super Converter</h1>
+                <select onChange={onSelect} value={index}>
+                    <option value="xx">Select your units</option>
+                    <option value="0"> Minutes & Houres</option>
+                    <option value="1">Km & Miles</option>
+                </select>
+                <hr />
+                {index === "xx" ? "Please select your units" : null}
+                {index === "0" ? <MinutesToHoures /> : null}
+                {index === "1" ? <KmToMiles /> : null}
+                {/* html내에서 js를 사용하고 싶으면 {}안에 작성하면 됨 */}
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root); 
+</script>
+
+</html>

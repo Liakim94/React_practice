@@ -1,4 +1,4 @@
-<!-- 리렌더링 시키기
+<!-- setState하고 리렌더링 시키기
   -->
 
 <!DOCTYPE html>
@@ -13,7 +13,11 @@
 <script type="text/babel"> //JSX script 추가 후 type 맞춰주면 적용됨
     const root = document.getElementById("root");
     function App() {
-        const [counter, setCounter]= React.useState(0); //이전 버전의 countUp 함수 역할을 array로 해줌
+        const [counter, setCounter]= React.useState(0); 
+        /*이전 버전의 countUp 함수 역할을 React.useState가 array로 해줌
+            첫번째 변수는 state명, 두번째 변수는 function명인 것
+            useState(0)으로 괄호 안에 숫자가 default 값
+        */
         const onClick = () =>{
             setCounter(counter +1); // setCounter 함수가 직접 렌더링을 해줌
         };
